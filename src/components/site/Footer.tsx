@@ -1,5 +1,4 @@
 import { Link } from "@tanstack/react-router";
-import logoWhite from "@/assets/leadvela-logo-horizontal-white.png.asset.json";
 import { SITE } from "@/lib/site";
 
 export function Footer() {
@@ -7,7 +6,7 @@ export function Footer() {
     <footer className="bg-navy text-navy-foreground">
       <div className="container-x grid gap-12 py-16 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
-          <Link to="/" aria-label="Leadvela home"><img src={logoWhite.url} alt="Leadvela" width={2000} height={560} className="h-11 w-auto" loading="lazy" /></Link>
+          <Link to="/" aria-label="Leadvela home"><img src="/leadvela-logo-horizontal-white.png" alt="Leadvela" width={2000} height={560} className="h-11 w-auto" loading="lazy" /></Link>
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-navy-foreground/70">
             A digital solutions agency designing websites, GoHighLevel CRM systems, sales funnels, and automated customer journeys for growing businesses.
           </p>

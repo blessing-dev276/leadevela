@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Compass, Palette, Plug, Repeat, FlaskConical } from "lucide-react";
-import portrait from "@/assets/founder-portrait.png.asset.json";
 import { FinalCta, Reveal, SectionHeading } from "@/components/site/primitives";
 import { PROCESS } from "./index";
 
@@ -26,6 +25,14 @@ const APPROACH = [
 
 const INDUSTRIES = ["Travel & Hospitality", "Professional Services", "Health & Wellness", "Real Estate", "Education & Training", "Events & Weddings"];
 
+const TEAM = [
+  { name: "Richard Promise", role: "Website Design" },
+  { name: "Emmanuel Sunday", role: "Web Development" },
+  { name: "Barakat Ayomide", role: "Client Success" },
+  { name: "Progress Raphael", role: "CRM Systems" },
+  { name: "Alli Racheal", role: "Automation" },
+];
+
 function AboutPage() {
   return (
     <>
@@ -43,13 +50,30 @@ function AboutPage() {
           <Reveal delay={0.15}>
             <figure className="relative mx-auto max-w-sm">
               <div className="absolute -inset-3 rotate-3 rounded-[2rem] bg-teal-gradient opacity-90" />
-              <img src={portrait.url} alt="Portrait of the Leadvela founder" width={1086} height={1448} className="relative aspect-[3/4] w-full rounded-[1.75rem] object-cover shadow-lift" />
+              <img src="/founder.png" alt="Portrait of the Leadvela founder" width={1086} height={1448} className="relative aspect-[3/4] w-full rounded-[1.75rem] object-cover shadow-lift" />
               <figcaption className="relative -mt-8 ml-6 w-fit rounded-2xl bg-card px-4 py-3 shadow-lift">
                 <p className="text-sm font-bold text-navy">Founder, Leadvela</p>
                 <p className="text-xs text-muted-foreground">Design & GoHighLevel systems</p>
               </figcaption>
             </figure>
           </Reveal>
+        </div>
+      </section>
+
+      <section className="container-x py-20 md:py-28">
+        <SectionHeading eyebrow="Our team" title="Meet the people behind Leadvela." intro="The people bringing together design, development, and the systems that support your business." />
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {TEAM.map((member, i) => (
+            <Reveal key={member.name} delay={i * 0.05}>
+              <div className="card-lift h-full p-6">
+                <div aria-hidden="true" className="flex size-14 items-center justify-center rounded-2xl bg-teal-gradient text-lg font-extrabold text-white">
+                  {member.name.split(" ").map((part) => part[0]).join("")}
+                </div>
+                <h3 className="mt-5 text-xl font-bold text-navy">{member.name}</h3>
+                <p className="mt-1 text-sm font-semibold text-accent">{member.role}</p>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </section>
 

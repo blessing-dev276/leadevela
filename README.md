@@ -242,7 +242,7 @@ Include:
 - Leadvela logo
 - Short agency description
 - Services, Portfolio, and About links
-- Contact: blessing@leadvela.com
+- Contact: hello@leadvela.com
 - Company email: admin@leadvela.com
 - Website: leadvela.com
 - Copyright notice
