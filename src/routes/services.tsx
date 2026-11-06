@@ -1,11 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight, Check } from "lucide-react";
-import { FinalCta, Reveal } from "@/components/site/primitives";
+import { Check } from "lucide-react";
+import { FinalCta, Reveal, ScheduleButton } from "@/components/site/primitives";
 import { services } from "@/data/services";
 import { useHeartbeatSound } from "@/hooks/useHeartbeatSound";
-import { SITE } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/services")({
@@ -22,7 +21,7 @@ export const Route = createFileRoute("/services")({
 
 function ServicesPage() {
   const { play } = useHeartbeatSound();
-  const [active, setActive] = useState(services[0].id);
+  const [active, setActive] = useState(services[0]!.id);
   const s = services.find((x) => x.id === active)!;
 
   const select = (id: string) => {
@@ -114,7 +113,7 @@ function ServiceDetail({ id }: { id: string }) {
           </ul>
         </div>
       </div>
-      <a href={SITE.bookingUrl} onClick={play} className="btn btn-primary mt-10">Request a Call <ArrowUpRight className="size-4" /></a>
+      <ScheduleButton className="mt-10" />
     </>
   );
 }

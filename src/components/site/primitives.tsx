@@ -1,8 +1,9 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, ArrowUpRight, Volume2, VolumeX } from "lucide-react";
+import { ArrowRight, Volume2, VolumeX } from "lucide-react";
 import type { ReactNode } from "react";
 import { SITE } from "@/lib/site";
+import { BookingDialog } from "./BookingDialog";
 import { useHeartbeatSound } from "@/hooks/useHeartbeatSound";
 import type { Project, ProjectStatus } from "@/data/projects";
 import { cn } from "@/lib/utils";
@@ -32,14 +33,9 @@ export function SectionHeading({ eyebrow, title, intro, center }: { eyebrow: str
   );
 }
 
-/** Primary call request CTA. Destination is configured in SITE.bookingUrl. */
-export function ScheduleButton({ variant = "primary", label = "Request a Call", className }: { variant?: "primary" | "navy" | "light"; label?: string; className?: string }) {
-  const { play } = useHeartbeatSound();
-  return (
-    <a href={SITE.bookingUrl} onClick={play} className={cn("btn", `btn-${variant}`, className)}>
-      {label} <ArrowUpRight className="size-4" />
-    </a>
-  );
+/** Opens the call request form. */
+export function ScheduleButton({ variant = "primary", className }: { variant?: "primary" | "navy" | "light"; className?: string }) {
+  return <BookingDialog variant={variant} className={className} />;
 }
 
 export function SoundToggle() {

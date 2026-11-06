@@ -1,11 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, ArrowUpRight, CheckCircle2, Circle, Globe, KanbanSquare, MailCheck, PlayCircle, RotateCcw, Zap, ClipboardList } from "lucide-react";
-import { Reveal, StatusBadge } from "@/components/site/primitives";
+import { ArrowLeft, ArrowRight, CheckCircle2, Circle, Globe, KanbanSquare, MailCheck, PlayCircle, RotateCcw, Zap, ClipboardList } from "lucide-react";
+import { Reveal, ScheduleButton, StatusBadge } from "@/components/site/primitives";
 import { getProject, projects, type Project } from "@/data/projects";
 import { useHeartbeatSound } from "@/hooks/useHeartbeatSound";
-import { SITE } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/portfolio/$slug")({
@@ -56,7 +55,7 @@ function CaseStudyPage() {
   const { project: p } = Route.useLoaderData();
   const { play } = useHeartbeatSound();
   const idx = projects.findIndex((x) => x.slug === p.slug);
-  const next = projects[(idx + 1) % projects.length];
+  const next = projects[(idx + 1) % projects.length] ?? p;
 
   return (
     <article>
@@ -213,7 +212,7 @@ function CaseStudyPage() {
           <div className="rounded-[1.75rem] bg-navy-gradient p-8 text-navy-foreground md:p-12">
             <h2 className="text-3xl font-extrabold">Build Something Similar</h2>
             <p className="mt-3 max-w-md text-navy-foreground/75">Let's adapt this approach to your business, your tools, and your customer journey.</p>
-            <a href={SITE.bookingUrl} onClick={play} className="btn btn-primary mt-7">Request a Call <ArrowUpRight className="size-4" /></a>
+            <ScheduleButton className="mt-7" />
           </div>
           <Link to="/portfolio/$slug" params={{ slug: next.slug }} onClick={play} className="card-lift group flex flex-col justify-between p-8">
             <p className="eyebrow">Next case study</p>
