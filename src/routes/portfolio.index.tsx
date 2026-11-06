@@ -66,7 +66,7 @@ function PortfolioPage() {
         {list.length === 0 && <p className="py-16 text-center text-muted-foreground">No projects with this status yet.</p>}
       </section>
 
-      <FinalCta title="Have a process that needs a better system?" text="We can build something similar for your business. Book a call to talk through your inquiry and follow-up process." />
+      <FinalCta title="Have a process that needs a better system?" text="We can build something similar for your business. Request a call to talk through your inquiry and follow-up process." />
     </>
   );
 }

@@ -114,7 +114,7 @@ function ServiceDetail({ id }: { id: string }) {
           </ul>
         </div>
       </div>
-      <a href={SITE.bookingUrl} target="_blank" rel="noopener" onClick={play} className="btn btn-primary mt-10">{s.cta} <ArrowUpRight className="size-4" /></a>
+      <a href={SITE.bookingUrl} onClick={play} className="btn btn-primary mt-10">Request a Call <ArrowUpRight className="size-4" /></a>
     </>
   );
 }

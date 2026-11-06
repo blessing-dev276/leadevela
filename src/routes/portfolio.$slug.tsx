@@ -213,7 +213,7 @@ function CaseStudyPage() {
           <div className="rounded-[1.75rem] bg-navy-gradient p-8 text-navy-foreground md:p-12">
             <h2 className="text-3xl font-extrabold">Build Something Similar</h2>
             <p className="mt-3 max-w-md text-navy-foreground/75">Let's adapt this approach to your business, your tools, and your customer journey.</p>
-            <a href={SITE.bookingUrl} target="_blank" rel="noopener" onClick={play} className="btn btn-primary mt-7">Schedule a Call <ArrowUpRight className="size-4" /></a>
+            <a href={SITE.bookingUrl} onClick={play} className="btn btn-primary mt-7">Request a Call <ArrowUpRight className="size-4" /></a>
           </div>
           <Link to="/portfolio/$slug" params={{ slug: next.slug }} onClick={play} className="card-lift group flex flex-col justify-between p-8">
             <p className="eyebrow">Next case study</p>

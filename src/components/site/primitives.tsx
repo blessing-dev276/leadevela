@@ -32,11 +32,11 @@ export function SectionHeading({ eyebrow, title, intro, center }: { eyebrow: str
   );
 }
 
-/** Primary "Schedule a Call" CTA. Destination is configured in SITE.bookingUrl. */
-export function ScheduleButton({ variant = "primary", label = "Schedule a Call", className }: { variant?: "primary" | "navy" | "light"; label?: string; className?: string }) {
+/** Primary call request CTA. Destination is configured in SITE.bookingUrl. */
+export function ScheduleButton({ variant = "primary", label = "Request a Call", className }: { variant?: "primary" | "navy" | "light"; label?: string; className?: string }) {
   const { play } = useHeartbeatSound();
   return (
-    <a href={SITE.bookingUrl} target="_blank" rel="noopener" onClick={play} className={cn("btn", `btn-${variant}`, className)}>
+    <a href={SITE.bookingUrl} onClick={play} className={cn("btn", `btn-${variant}`, className)}>
       {label} <ArrowUpRight className="size-4" />
     </a>
   );
@@ -106,7 +106,7 @@ export function ProjectCard({ project, large }: { project: Project; large?: bool
   );
 }
 
-export function FinalCta({ title = "Let's map out the system your business needs.", text = "Book a discovery call. We'll talk through how inquiries reach you today, where follow-up slips, and what a better setup could look like." }: { title?: string; text?: string }) {
+export function FinalCta({ title = "Let's map out the system your business needs.", text = "Request a discovery call. Tell us when you're available, and we'll follow up to confirm a time." }: { title?: string; text?: string }) {
   return (
     <section className="container-x py-20 md:py-28">
       <Reveal>
