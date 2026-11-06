@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, CheckCircle2, Circle, Globe, KanbanSquare, MailCheck, PlayCircle, RotateCcw, Zap, ClipboardList } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, CheckCircle2, Circle, Globe, KanbanSquare, MailCheck, PlayCircle, RotateCcw, Zap, ClipboardList } from "lucide-react";
 import { Reveal, ScheduleButton, StatusBadge } from "@/components/site/primitives";
 import { getProject, projects, type Project } from "@/data/projects";
 import { useHeartbeatSound } from "@/hooks/useHeartbeatSound";
@@ -76,6 +76,7 @@ function CaseStudyPage() {
           <div className="mt-6 flex flex-wrap gap-2">
             {p.services.map((s) => <span key={s} className="rounded-full bg-navy-foreground/10 px-3 py-1 text-xs font-semibold">{s}</span>)}
           </div>
+          {p.websiteUrl && <a href={p.websiteUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary mt-8">View live demo <ArrowUpRight className="size-4" /></a>}
         </div>
       </section>
 
@@ -109,7 +110,22 @@ function CaseStudyPage() {
         </Block>
 
         <Block eyebrow="Website screenshots" title="Website & inquiry experience">
-          <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
+          {p.media ? <>
+            <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
+              <Frame label="Aurelia Journeys · Homepage screenshot">
+                <img src={p.media.homepage} alt="Screenshot of the Aurelia Journeys homepage" loading="lazy" width={2872} height={1398} className="w-full" />
+              </Frame>
+              <Frame label="Consultation form · Illustrative mockup">
+                <img src={p.media.form} alt="Illustrative mockup of the six-field consultation form" loading="lazy" width={928} height={1152} className="mx-auto max-h-[38rem] w-auto" />
+              </Frame>
+            </div>
+            <Frame label="Aurelia Journeys · Full-page screenshot">
+              <div className="mt-6 max-h-[38rem] overflow-y-auto">
+                <img src={p.media.fullPage} alt="Full-page screenshot of the Aurelia Journeys demo website" loading="lazy" width={2880} height={10928} className="w-full" />
+              </div>
+            </Frame>
+            <p className="mt-3 text-xs text-muted-foreground">Homepage and full-page captures show the GoHighLevel preview. The form image is an illustrative mockup.</p>
+          </> : <><div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
             <Frame label={`${p.client.toLowerCase().replace(/\s+/g, "")}.demo — Home`}>
               <div className="relative aspect-[16/10]">
                 <img src={p.cover} alt={`Website hero mockup for ${p.client}`} loading="lazy" width={1280} height={896} className="size-full object-cover" />
@@ -129,7 +145,7 @@ function CaseStudyPage() {
               </div>
             </Frame>
           </div>
-          <p className="mt-3 text-xs text-muted-foreground">Illustrative mockups. Final screenshots are added as each project is completed.</p>
+          <p className="mt-3 text-xs text-muted-foreground">Illustrative mockups. Final screenshots are added as each project is completed.</p></>}
         </Block>
 
         <Block eyebrow="Interactive demo" title="Walk through the journey">
@@ -137,7 +153,12 @@ function CaseStudyPage() {
         </Block>
 
         <Block eyebrow="CRM pipeline" title="Opportunity pipeline">
-          <Frame label="GoHighLevel · Opportunities">
+          {p.media ? <>
+            <Frame label="New Inquiry pipeline · Illustrative mockup">
+              <img src={p.media.pipeline} alt="Illustrative pipeline mockup showing six stages from New Inquiry to Lost" loading="lazy" width={1376} height={768} className="w-full" />
+            </Frame>
+            <p className="mt-3 text-xs text-muted-foreground">The stage names match the saved New Inquiry pipeline. The image is an illustrative mockup, not a CRM screenshot.</p>
+          </> : <Frame label="GoHighLevel · Opportunities">
             <div className="grid gap-3 overflow-x-auto p-4 sm:grid-cols-2 lg:grid-cols-4">
               {p.pipeline.map((stage, i) => (
                 <div key={stage} className="rounded-xl bg-muted/60 p-3">
@@ -153,7 +174,7 @@ function CaseStudyPage() {
                 </div>
               ))}
             </div>
-          </Frame>
+          </Frame>}
         </Block>
 
         <Block eyebrow="Workflow automation" title="Automation workflow">
@@ -168,11 +189,12 @@ function CaseStudyPage() {
               ))}
             </div>
           </Frame>
+          {p.workflow.note && <p className="mt-3 text-sm text-muted-foreground">{p.workflow.note}</p>}
         </Block>
 
         <Block eyebrow="System architecture" title="How the pieces connect">
           <div className="grid items-center gap-3 md:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr]">
-            {[{ i: Globe, t: "Website", d: "React front end" }, { i: ClipboardList, t: "Inquiry form", d: "Structured fields" }, { i: KanbanSquare, t: "GoHighLevel CRM", d: "Contact + pipeline" }, { i: MailCheck, t: "Automations", d: "Email, SMS, tasks" }].map((n, k, arr) => (
+            {(p.media ? [{ i: Globe, t: "GHL website", d: "Preview page" }, { i: ClipboardList, t: "GHL form", d: "Trip inquiry fields" }, { i: KanbanSquare, t: "GHL pipeline", d: "Six opportunity stages" }, { i: MailCheck, t: "Draft workflow", d: "Email + SMS configured" }] : [{ i: Globe, t: "Website", d: "React front end" }, { i: ClipboardList, t: "Inquiry form", d: "Structured fields" }, { i: KanbanSquare, t: "GoHighLevel CRM", d: "Contact + pipeline" }, { i: MailCheck, t: "Automations", d: "Email, SMS, tasks" }]).map((n, k, arr) => (
               <>
                 <div key={n.t} className="rounded-2xl border bg-card p-5 text-center shadow-soft">
                   <n.i className="mx-auto size-6 text-primary" />
@@ -185,7 +207,7 @@ function CaseStudyPage() {
           </div>
         </Block>
 
-        <Block eyebrow="Test scenario" title="Test scenario & verified outcomes">
+        <Block eyebrow="Test scenario" title={p.test.checks.some((check) => check.result === "Verified") ? "Test scenario & verified outcomes" : "Test plan & expected outcomes"}>
           <div className="rounded-2xl bg-secondary/70 p-5"><p className="text-sm font-semibold text-navy">{p.test.scenario}</p></div>
           <ul className="mt-4 divide-y rounded-2xl border bg-card">
             {p.test.checks.map((c) => (

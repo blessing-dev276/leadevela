@@ -1,4 +1,3 @@
-import travelCover from "@/assets/cover-travel-advisor.jpg";
 import cruiseCover from "@/assets/cover-cruise.jpg";
 import yachtCover from "@/assets/cover-yacht.jpg";
 import groupCover from "@/assets/cover-group-tour.jpg";
@@ -17,11 +16,13 @@ export type Project = {
   status: ProjectStatus;
   cover: string;
   coverAlt: string;
+  websiteUrl?: string;
+  media?: { homepage: string; fullPage: string; form: string; pipeline: string };
   overview: string;
   scenario: string;
   objectives: string[];
   pipeline: string[];
-  workflow: { trigger: string; steps: string[] };
+  workflow: { trigger: string; steps: string[]; note?: string };
   formFields: string[];
   test: { scenario: string; checks: { label: string; result: "Verified" | "Planned" }[] };
   technologies: string[];
@@ -35,40 +36,47 @@ export const projects: Project[] = [
     client: "Aurelia Journeys",
     clientNote: "Fictional demonstration brand",
     industry: "Luxury Travel Advisory",
-    services: ["Website Design", "GoHighLevel CRM", "Workflow Automation", "Appointment Booking"],
+    services: ["Website Design", "GoHighLevel Forms", "CRM Pipeline", "Workflow Automation"],
     summary:
-      "A consultation-led website for a boutique travel advisor, connecting trip inquiries to a CRM pipeline, a booking calendar, and automated follow-up.",
+      "A consultation-led GoHighLevel demo with a trip inquiry form, a six-stage CRM pipeline, and a draft acknowledgment workflow.",
     status: "Completed Demo",
-    cover: travelCover,
-    coverAlt: "Travel advisor's desk with notebook, passport, map and coffee in soft morning light",
+    cover: "/portfolio/travel-advisor/homepage.png",
+    coverAlt: "Aurelia Journeys demo homepage with a luxury travel hero and consultation call to action",
+    websiteUrl: "https://sites.leadconnectorhq.com/preview/a3wx7FZsULm7DjJWrW3W?notrack=true",
+    media: {
+      homepage: "/portfolio/travel-advisor/homepage.png",
+      fullPage: "/portfolio/travel-advisor/full-page.png",
+      form: "/portfolio/travel-advisor/consultation-form-mockup.png",
+      pipeline: "/portfolio/travel-advisor/pipeline-mockup.png",
+    },
     overview:
-      "Aurelia Journeys is a fictional boutique travel advisor used to demonstrate how a consultation-based travel business can move from a website inquiry to a booked planning call without manual hand-offs.",
+      "Aurelia Journeys is a fictional demonstration brand. Its GoHighLevel preview page presents the travel advisory experience and a consultation inquiry form. A six-stage CRM pipeline and a four-step workflow have been configured; the workflow remains a draft pending publication and testing.",
     scenario:
       "The advisor receives trip requests through email, Instagram, and a basic contact form. Details arrive incomplete, follow-up depends on memory, and there is no single view of which travelers are waiting for a response.",
     objectives: [
       "Present the advisor's services with a calm, premium website",
       "Capture structured trip details in a single inquiry form",
-      "Route every inquiry into a GoHighLevel pipeline automatically",
-      "Send an immediate acknowledgment and invite travelers to book a consultation",
-      "Remind travelers before their call and alert the advisor to stalled inquiries",
+      "Route form inquiries into the New Inquiry pipeline when the workflow is published",
+      "Create or update contacts from form answers",
+      "Send acknowledgment email and SMS after a test confirms the workflow runs",
     ],
-    pipeline: ["New Inquiry", "Consultation Booked", "Proposal Sent", "Deposit Received"],
+    pipeline: ["New Inquiry", "Contacted", "Consultation Booked", "Proposal Sent", "Booked Trip", "Lost"],
     workflow: {
-      trigger: "Trip inquiry form submitted",
-      steps: ["Create / update contact", "Add to pipeline: New Inquiry", "Send acknowledgment email + SMS", "Wait 1 day → booking reminder if no call booked", "Notify advisor of new inquiry"],
+      trigger: "Form Submitted: Aurelia Journeys Trip Inquiry",
+      steps: ["Create or update contact with form data", "Create opportunity in New Inquiry pipeline", "Send acknowledgment email to contact", "Send acknowledgment SMS to contact"],
+      note: "The Aurelia Journeys Trip Inquiry form is now selected on the preview page. The workflow is still a draft, so its actions will not run until it is published.",
     },
-    formFields: ["Full name", "Email", "Destination ideas", "Travel dates", "Number of travelers", "Budget range"],
+    formFields: ["Full Name (required)", "Email (required)", "Phone", "Destination (required)", "Travel Dates", "Trip Details / Budget"],
     test: {
-      scenario: "A test traveler submits an inquiry for a 10-day Amalfi Coast trip for two, then does not book a call within 24 hours.",
+      scenario: "A test traveler submits the Aurelia Journeys Trip Inquiry form. After publication, each workflow step should be checked with a test contact.",
       checks: [
-        { label: "Contact created with all form fields mapped", result: "Verified" },
-        { label: "Opportunity placed in New Inquiry stage", result: "Verified" },
-        { label: "Acknowledgment email delivered to test inbox", result: "Verified" },
-        { label: "Booking reminder sent after wait step", result: "Verified" },
-        { label: "Advisor notification received", result: "Verified" },
+        { label: "Contact created with all form fields mapped", result: "Planned" },
+        { label: "Opportunity placed in New Inquiry stage", result: "Planned" },
+        { label: "Acknowledgment email delivered to test inbox", result: "Planned" },
+        { label: "Acknowledgment SMS delivered to test phone", result: "Planned" },
       ],
     },
-    technologies: ["React", "Tailwind CSS", "GoHighLevel", "GHL Workflows", "GHL Calendars", "Webhooks"],
+    technologies: ["GoHighLevel Website Builder", "GoHighLevel Forms", "GHL Opportunities", "GHL Workflows"],
   },
   {
     slug: "cruise-agency-quote-follow-up",
