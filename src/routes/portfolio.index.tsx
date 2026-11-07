@@ -63,7 +63,7 @@ function PortfolioPage() {
         <Reveal>
           <p className="eyebrow">Selected work</p>
           <h2 className="mt-3 max-w-3xl text-3xl font-extrabold text-navy md:text-4xl">Built across industries. Connected by a clear process.</h2>
-          <p className="mt-4 max-w-2xl text-muted-foreground">These case studies use supplied project screenshots. Each page explains the visible work and distinguishes implementation evidence from unverified business results.</p>
+          <p className="mt-4 max-w-2xl text-muted-foreground">Leadvela built the work shown in these case studies. Each page uses project screenshots to explain the work and separates implementation evidence from unverified business results.</p>
         </Reveal>
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
           {workCases.map((sample, index) => <div key={sample.slug} className={cn(index === 0 && "lg:col-span-2")}><WorkCard sample={sample} featured={index === 0} /></div>)}

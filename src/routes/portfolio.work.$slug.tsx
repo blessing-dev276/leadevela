@@ -40,7 +40,7 @@ function WorkCasePage() {
             <p className="mt-10 text-xs font-bold uppercase tracking-[0.18em] text-primary">{sample.category}</p>
             <h1 className="mt-4 text-4xl font-extrabold leading-tight md:text-6xl">{sample.title}</h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-navy-foreground/75">{sample.summary}</p>
-            <p className="mt-5 text-sm font-semibold text-navy-foreground/60">Project: {sample.client}</p>
+            <p className="mt-5 text-sm font-semibold text-navy-foreground/70">Built by Leadvela · Project: {sample.client}</p>
             <div className="mt-6 flex flex-wrap gap-2">
               {sample.services.map((service) => <span key={service} className="rounded-full border border-navy-foreground/20 px-3 py-1.5 text-xs font-semibold">{service}</span>)}
             </div>
