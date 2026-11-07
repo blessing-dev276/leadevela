@@ -1,9 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check, Compass, Hotel, Briefcase, Stethoscope, Home, GraduationCap } from "lucide-react";
-import { FinalCta, ProjectCard, Reveal, ScheduleButton, SectionHeading } from "@/components/site/primitives";
+import { FinalCta, Reveal, ScheduleButton, SectionHeading } from "@/components/site/primitives";
 import { FlowVisual } from "@/components/site/FlowVisual";
 import { services } from "@/data/services";
-import { projects } from "@/data/projects";
+import { workCases } from "@/data/work";
 import { useHeartbeatSound } from "@/hooks/useHeartbeatSound";
 
 export const Route = createFileRoute("/")({
@@ -122,12 +122,24 @@ function HomePage() {
       {/* Featured portfolio */}
       <section className="container-x py-20 md:py-28">
         <div className="flex flex-wrap items-end justify-between gap-6">
-          <SectionHeading eyebrow="Featured portfolio" title="See the systems in action." intro="Demonstration projects showing how we connect websites, CRM pipelines, and automation. Each one is clearly labeled with its current status." />
+          <SectionHeading eyebrow="Featured portfolio" title="See the systems in action." intro="Explore selected project work across forms, email journeys, CRM, and automation, with screenshots and a clear account of what each system does." />
           <Reveal><Link to="/portfolio" onClick={play} className="btn btn-outline">View portfolio <ArrowRight className="size-4" /></Link></Reveal>
         </div>
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {projects.slice(0, 3).map((p, i) => (
-            <Reveal key={p.slug} delay={i * 0.06}><ProjectCard project={p} /></Reveal>
+          {workCases.slice(0, 3).map((sample, i) => (
+            <Reveal key={sample.slug} delay={i * 0.06}>
+              <Link to="/portfolio/work/$slug" params={{ slug: sample.slug }} className="card-lift group flex h-full flex-col overflow-hidden">
+                <div className="flex aspect-[4/3] items-center justify-center bg-muted/50 p-4">
+                  <img src={sample.cover} alt={sample.coverAlt} loading="lazy" width={1600} height={900} className="max-h-full w-full rounded-xl object-contain" />
+                </div>
+                <div className="flex flex-1 flex-col p-6">
+                  <p className="eyebrow">{sample.category}</p>
+                  <h3 className="mt-2 text-xl font-bold text-navy">{sample.title}</h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{sample.summary}</p>
+                  <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-primary-deep">View case study <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" /></span>
+                </div>
+              </Link>
+            </Reveal>
           ))}
         </div>
       </section>
