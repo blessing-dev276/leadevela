@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Compass, Palette, Plug, Repeat, FlaskConical } from "lucide-react";
 import { FinalCta, Reveal, SectionHeading } from "@/components/site/primitives";
-import { PROCESS } from "./index";
+import { PROCESS } from "@/data/process";
 
 export const Route = createFileRoute("/about")({
   head: () => ({

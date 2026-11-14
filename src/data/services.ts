@@ -1,7 +1,16 @@
 import { CalendarCheck, Filter, LayoutTemplate, Plug, Users, Workflow, type LucideIcon } from "lucide-react";
 
+export const SERVICE_GROUPS = [
+  "Capture every inquiry",
+  "Organize and follow up",
+  "Book it, and keep it running",
+] as const;
+
+export type ServiceGroup = (typeof SERVICE_GROUPS)[number];
+
 export type Service = {
   id: string;
+  group: ServiceGroup;
   title: string;
   short: string;
   icon: LucideIcon;
@@ -14,6 +23,7 @@ export type Service = {
 export const services: Service[] = [
   {
     id: "websites",
+    group: "Capture every inquiry",
     title: "Website Design & Development",
     short: "Responsive business websites, landing pages, and conversion-focused interfaces.",
     icon: LayoutTemplate,
@@ -25,6 +35,7 @@ export const services: Service[] = [
   },
   {
     id: "crm",
+    group: "Organize and follow up",
     title: "GoHighLevel CRM Setup",
     short: "Contact management, custom fields, pipeline configuration, and lead organization.",
     icon: Users,
@@ -35,6 +46,7 @@ export const services: Service[] = [
   },
   {
     id: "automation",
+    group: "Organize and follow up",
     title: "Workflow Automation",
     short: "Automated lead acknowledgment, follow-ups, task creation, and notifications.",
     icon: Workflow,
@@ -45,6 +57,7 @@ export const services: Service[] = [
   },
   {
     id: "funnels",
+    group: "Capture every inquiry",
     title: "Sales Funnels & Landing Pages",
     short: "Lead generation funnels, inquiry forms, and conversion journeys.",
     icon: Filter,
@@ -55,6 +68,7 @@ export const services: Service[] = [
   },
   {
     id: "booking",
+    group: "Book it, and keep it running",
     title: "Appointment Booking Systems",
     short: "Consultation calendars, scheduling flows, confirmations, and reminders.",
     icon: CalendarCheck,
@@ -65,6 +79,7 @@ export const services: Service[] = [
   },
   {
     id: "integration",
+    group: "Book it, and keep it running",
     title: "CRM Integration & Troubleshooting",
     short: "Connecting website inquiries to CRM processes, fixing broken workflows, and improving existing systems.",
     icon: Plug,

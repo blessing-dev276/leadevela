@@ -34,8 +34,8 @@ export function SectionHeading({ eyebrow, title, intro, center }: { eyebrow: str
 }
 
 /** Opens the call request form. */
-export function ScheduleButton({ variant = "primary", className }: { variant?: "primary" | "navy" | "light"; className?: string }) {
-  return <BookingDialog variant={variant} className={className} />;
+export function ScheduleButton({ variant = "primary", className, topic, label }: { variant?: "primary" | "navy" | "light" | "link"; className?: string; topic?: string; label?: string }) {
+  return <BookingDialog variant={variant} className={className} topic={topic} label={label} />;
 }
 
 export function SoundToggle() {

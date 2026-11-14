@@ -7,6 +7,7 @@ import { MissedEnquiryCalculator } from "@/components/site/MissedEnquiryCalculat
 import { DragToCompare } from "@/components/site/DragToCompare";
 import { Faq, FAQS } from "@/components/site/Faq";
 import { services } from "@/data/services";
+import { PROCESS } from "@/data/process";
 import { workCases } from "@/data/work";
 import { useHeartbeatSound } from "@/hooks/useHeartbeatSound";
 
@@ -45,13 +46,6 @@ const INDUSTRIES = [
   { icon: Hotel, name: "Events & Weddings", text: "Planners coordinating guests and bookings." },
 ];
 
-export const PROCESS = [
-  { title: "Discover", text: "We map how customers find you, inquire, and move toward a decision today." },
-  { title: "Design", text: "We design the website and journey around the actions that matter most." },
-  { title: "Connect", text: "We set up the CRM, forms, calendars, and integrations behind the scenes." },
-  { title: "Automate", text: "We automate acknowledgments, follow-ups, reminders, and internal tasks." },
-  { title: "Test & Refine", text: "We run real test scenarios, verify each step, and hand over clear documentation." },
-];
 
 const WHY = [
   "Design and systems handled by one team, so nothing gets lost between them",

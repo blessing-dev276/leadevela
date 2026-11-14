@@ -24,7 +24,7 @@ function ukNow() {
   return { date, key: `${date}T${value("hour")}:${value("minute")}` };
 }
 
-export function BookingDialog({ variant = "primary", className }: { variant?: "primary" | "navy" | "light"; className?: string | undefined }) {
+export function BookingDialog({ variant = "primary", className, topic, label }: { variant?: "primary" | "navy" | "light" | "link"; className?: string | undefined; topic?: string | undefined; label?: string | undefined }) {
   const { play } = useHeartbeatSound();
   const [today, setToday] = useState("");
   const [sending, setSending] = useState(false);
@@ -100,8 +100,17 @@ export function BookingDialog({ variant = "primary", className }: { variant?: "p
   return (
     <Dialog onOpenChange={(open) => { if (!open) { setSubmitted(false); setError(""); } }}>
       <DialogTrigger asChild>
-        <button type="button" onClick={play} className={cn("btn", `btn-${variant}`, className)}>
-          Book a free call <ArrowUpRight className="size-4" />
+        <button
+          type="button"
+          onClick={play}
+          className={cn(
+            variant === "link"
+              ? "inline-flex items-center gap-1.5 text-sm font-bold text-primary-deep hover:underline"
+              : cn("btn", `btn-${variant}`),
+            className,
+          )}
+        >
+          {label ?? "Book a free call"} <ArrowUpRight className="size-4" />
         </button>
       </DialogTrigger>
       <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-xl">
@@ -151,7 +160,7 @@ export function BookingDialog({ variant = "primary", className }: { variant?: "p
               </div>
               <p className="text-xs text-muted-foreground">Skip the date and time if you like &mdash; we&rsquo;ll reply with a few slots that work. All times are UK (GMT or BST).</p>
               <label className="grid gap-1.5 text-sm font-semibold text-navy">What would you like to discuss? <span className="font-normal text-muted-foreground">(optional)</span>
-                <textarea name="topic" rows={3} className="rounded-xl border bg-card px-4 py-3 font-normal" />
+                <textarea name="topic" rows={3} defaultValue={topic ?? ""} className="rounded-xl border bg-card px-4 py-3 font-normal" />
               </label>
               <div className="sr-only" aria-hidden="true"><label>Website<input name="website" tabIndex={-1} autoComplete="off" /></label></div>
               {error && <p role="alert" className="text-sm text-destructive">{error}</p>}
