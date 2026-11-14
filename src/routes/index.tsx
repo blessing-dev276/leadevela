@@ -83,7 +83,7 @@ function HomePage() {
 
       {/* Reserved space for a real client video testimonial */}
       <section className="container-x py-16 md:py-24" aria-labelledby="client-stories-title">
-        <div className="grid items-center gap-8 rounded-[2rem] border bg-card p-5 shadow-soft sm:p-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-12 lg:p-12">
+        <div className="grid items-center gap-8 rounded-[2rem] border bg-card p-5 shadow-soft sm:p-8 lg:grid-cols-[1fr_0.9fr] lg:gap-12 lg:p-12">
           <Reveal>
             <p className="eyebrow">Client stories</p>
             <h2 id="client-stories-title" className="mt-3 text-3xl font-extrabold text-navy md:text-4xl">The experience, in their own words.</h2>
@@ -91,8 +91,8 @@ function HomePage() {
             <div className="mt-8 h-px w-16 bg-primary" aria-hidden="true" />
             <p className="mt-5 text-sm font-semibold text-primary-deep">Client video coming soon</p>
           </Reveal>
-          <Reveal delay={0.08}>
-            <div className="relative grid aspect-video place-items-center overflow-hidden rounded-[1.5rem] bg-navy-gradient p-6 text-center text-navy-foreground shadow-lift">
+          <Reveal delay={0.08} className="w-full">
+            <div className="relative mx-auto grid aspect-[9/16] w-full max-w-80 place-items-center overflow-hidden rounded-[1.5rem] bg-navy-gradient p-6 text-center text-navy-foreground shadow-lift">
               <div className="absolute -right-12 -top-12 size-48 rounded-full border border-white/10" aria-hidden="true" />
               <div className="absolute -bottom-20 -left-12 size-64 rounded-full bg-primary/15 blur-2xl" aria-hidden="true" />
               <div className="relative">
