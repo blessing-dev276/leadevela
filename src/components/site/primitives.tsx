@@ -111,7 +111,7 @@ export function FinalCta({ title = "Let's map out the system your business needs
           <div className="pointer-events-none absolute -bottom-24 -left-16 size-72 rounded-full bg-accent/20 blur-3xl" />
           <h2 className="relative mx-auto max-w-2xl text-3xl font-extrabold md:text-5xl">{title}</h2>
           <p className="relative mx-auto mt-5 max-w-xl text-lg text-navy-foreground/75">{text}</p>
-          <div className="relative mt-9 flex flex-wrap justify-center gap-3">
+          <div className="relative mt-9 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             <ScheduleButton />
             <a href={`mailto:${SITE.contactEmail}`} className="btn border border-navy-foreground/25 text-navy-foreground hover:border-navy-foreground">Email {SITE.contactEmail}</a>
           </div>

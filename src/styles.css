@@ -122,7 +122,7 @@
   font-size: 0.925rem;
   transition: transform 0.18s ease, box-shadow 0.25s ease, background-color 0.2s ease, color 0.2s ease;
   cursor: pointer;
-  white-space: nowrap;
+  text-align: center;
   &:active { transform: scale(0.97); }
 }
 @utility btn-primary {
