@@ -32,6 +32,8 @@
   --color-navy-foreground: var(--navy-foreground);
   --color-navy-soft: var(--navy-soft);
   --color-teal-tint: var(--teal-tint);
+  --color-rose-tint: var(--rose-tint);
+  --color-mint-tint: var(--mint-tint);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
@@ -61,6 +63,9 @@
   --navy-foreground: oklch(0.97 0.004 200);
   --navy-soft: oklch(0.32 0.05 250);
   --teal-tint: oklch(0.95 0.03 180);
+  /* Comparison panels: a warm 'before' and a cool 'after'. */
+  --rose-tint: oklch(0.955 0.022 30);
+  --mint-tint: oklch(0.955 0.025 170);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.99 0 0);
   --border: oklch(0.91 0.008 220);

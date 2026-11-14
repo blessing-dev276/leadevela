@@ -15,6 +15,7 @@ export function Footer() {
           <p className="text-xs font-bold uppercase tracking-[0.16em] text-navy-foreground/50">Explore</p>
           <ul className="mt-4 space-y-2.5 text-sm">
             <li><Link to="/services" className="hover:text-primary">Services</Link></li>
+            <li><Link to="/demo" className="hover:text-primary">Live demo</Link></li>
             <li><Link to="/portfolio" className="hover:text-primary">Portfolio</Link></li>
             <li><Link to="/about" className="hover:text-primary">About</Link></li>
           </ul>
