@@ -3,6 +3,8 @@ import { ArrowRight, Check, Compass, Hotel, Briefcase, Stethoscope, Home, Gradua
 import { FinalCta, Reveal, ScheduleButton, SectionHeading } from "@/components/site/primitives";
 import { FlowVisual } from "@/components/site/FlowVisual";
 import { TestimonialVideo } from "@/components/site/TestimonialVideo";
+import { MissedEnquiryCalculator } from "@/components/site/MissedEnquiryCalculator";
+import { Faq, FAQS } from "@/components/site/Faq";
 import { services } from "@/data/services";
 import { workCases } from "@/data/work";
 import { useHeartbeatSound } from "@/hooks/useHeartbeatSound";
@@ -14,6 +16,20 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Leadvela builds websites, GoHighLevel CRM systems, and automated customer journeys that help businesses capture and follow up on every inquiry." },
       { property: "og:title", content: "Leadvela — Beautiful Websites. Smarter Systems. Better Business." },
       { property: "og:description", content: "Websites, GoHighLevel CRM setup, sales funnels, and workflow automation for growing businesses." },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: FAQS.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }),
+      },
     ],
   }),
   component: HomePage,
@@ -53,26 +69,26 @@ function HomePage() {
       <section className="relative overflow-hidden bg-hero">
         <div className="container-x grid items-center gap-10 pb-16 pt-12 sm:gap-14 md:pb-28 md:pt-20 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
-            <Reveal><p className="eyebrow">Digital solutions agency</p></Reveal>
+            <Reveal><p className="eyebrow">Websites &amp; GoHighLevel systems</p></Reveal>
             <Reveal delay={0.05}>
               <h1 className="mt-5 text-4xl font-extrabold leading-[1.05] text-navy sm:text-5xl lg:text-6xl">
-                Beautiful Websites. <span className="text-primary">Smarter Systems.</span> Better Business.
+                Every inquiry answered. <span className="text-primary">Even the ones you&rsquo;d miss.</span>
               </h1>
             </Reveal>
             <Reveal delay={0.12}>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-                Leadvela builds websites, CRM systems, and automated customer journeys that help businesses capture opportunities, manage inquiries, and follow up more effectively.
+                The message that arrives while you&rsquo;re with a client. The form filled in at 11pm. The follow-up you meant to send on Tuesday. Leadvela builds the website and GoHighLevel system that catches all three, so the work you already paid to attract doesn&rsquo;t quietly go to someone else.
               </p>
             </Reveal>
             <Reveal delay={0.18}>
               <div className="mt-9 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                 <ScheduleButton />
-                <Link to="/portfolio" onClick={play} className="btn btn-outline">Explore Our Portfolio <ArrowRight className="size-4" /></Link>
+                <Link to="/portfolio" onClick={play} className="btn btn-outline">See real client work <ArrowRight className="size-4" /></Link>
               </div>
             </Reveal>
             <Reveal delay={0.24}>
               <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold text-muted-foreground">
-                {["Website design", "GoHighLevel CRM", "Automation"].map((t) => (
+                {["Free, no-obligation call", "Written quote before any work", "You own everything we build"].map((t) => (
                   <li key={t} className="flex items-center gap-2"><Check className="size-4 text-primary" />{t}</li>
                 ))}
               </ul>
@@ -86,7 +102,7 @@ function HomePage() {
       <section className="container-x py-16 md:py-24" aria-labelledby="client-stories-title">
         <div className="grid items-center gap-8 rounded-[2rem] border bg-card p-5 shadow-soft sm:p-8 lg:grid-cols-[1fr_0.9fr] lg:gap-12 lg:p-12">
           <Reveal>
-            <p className="eyebrow">Client stories</p>
+            <p className="eyebrow">Real client, real system</p>
             <h2 id="client-stories-title" className="mt-3 text-3xl font-extrabold text-navy md:text-4xl">The experience, in their own words.</h2>
             <blockquote className="mt-5 max-w-md text-lg leading-relaxed text-muted-foreground">
               &ldquo;Their team set up GoHighLevel for me, and now I can see who&rsquo;s waiting for a reply as soon as I log in. That&rsquo;s made my mornings a lot easier.&rdquo;
@@ -136,6 +152,13 @@ function HomePage() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* Cost of missed inquiries */}
+      <section className="container-x py-20 md:py-28">
+        <Reveal>
+          <MissedEnquiryCalculator />
+        </Reveal>
       </section>
 
       {/* Featured portfolio */}
@@ -195,6 +218,8 @@ function HomePage() {
           ))}
         </ul>
       </section>
+
+      <Faq />
 
       <FinalCta />
     </>

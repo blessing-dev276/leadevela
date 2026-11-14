@@ -44,8 +44,15 @@ export function BookingDialog({ variant = "primary", className }: { variant?: "p
     const hour24 = hour % 12 + (period === "PM" ? 12 : 0);
     const selectedKey = `${date}T${String(hour24).padStart(2, "0")}:${minute}`;
 
-    if (!date || !Number.isInteger(hour) || hour < 1 || hour > 12 || !MINUTES.includes(minute) || !["AM", "PM"].includes(period) || selectedKey <= ukNow().key) {
-      setError("Choose a future date and time in the UK time zone.");
+    const partial = [date, String(data.get("hour") || ""), minute, period].filter(Boolean);
+    const wantsTime = partial.length > 0;
+
+    if (wantsTime && partial.length < 4) {
+      setError("Please finish the date and time, or clear them and we'll suggest times instead.");
+      return;
+    }
+    if (wantsTime && selectedKey <= ukNow().key) {
+      setError("That time has already passed. Please choose a later one.");
       return;
     }
 
@@ -54,7 +61,9 @@ export function BookingDialog({ variant = "primary", className }: { variant?: "p
     const name = String(data.get("name") || "").trim();
     const email = String(data.get("email") || "").trim();
     const topic = String(data.get("topic") || "").trim();
-    const preferredTime = `${date} at ${hour}:${minute} ${period} UK time (Europe/London)`;
+    const preferredTime = wantsTime
+      ? `${date} at ${hour}:${minute} ${period} UK time (Europe/London)`
+      : "No preference given - suggest times";
 
     try {
       const response = await fetch(`https://formsubmit.co/ajax/${SITE.companyEmail}`, {
@@ -68,11 +77,11 @@ export function BookingDialog({ variant = "primary", className }: { variant?: "p
           _honey: String(data.get("website") || ""),
           name,
           email,
-          preferred_date: date,
-          preferred_time: `${hour}:${minute} ${period}`,
+          preferred_date: date || "No preference",
+          preferred_time: wantsTime ? `${hour}:${minute} ${period}` : "No preference",
           time_zone: UK_TIME_ZONE,
           topic: topic || "Not provided",
-          message: `${name} (${email}) requested a call on ${preferredTime}. ${topic}`,
+          message: `${name} (${email}) requested a call. Preferred time: ${preferredTime}. ${topic}`,
         }),
       });
       const result = await response.json() as { success?: unknown };
@@ -92,22 +101,22 @@ export function BookingDialog({ variant = "primary", className }: { variant?: "p
     <Dialog onOpenChange={(open) => { if (!open) { setSubmitted(false); setError(""); } }}>
       <DialogTrigger asChild>
         <button type="button" onClick={play} className={cn("btn", `btn-${variant}`, className)}>
-          Schedule a Call <ArrowUpRight className="size-4" />
+          Book a free call <ArrowUpRight className="size-4" />
         </button>
       </DialogTrigger>
       <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-xl">
         {submitted ? (
           <div role="status" className="py-8 text-center">
             <CheckCircle2 className="mx-auto size-14 text-primary" aria-hidden="true" />
-            <DialogTitle className="mt-5 text-2xl font-bold text-navy">Request submitted</DialogTitle>
-            <DialogDescription className="mt-3">Your preferred call time was submitted for {SITE.companyEmail}. We'll email you to confirm the appointment.</DialogDescription>
+            <DialogTitle className="mt-5 text-2xl font-bold text-navy">Request received</DialogTitle>
+            <DialogDescription className="mt-3">Thanks &mdash; we&rsquo;ve got it. We&rsquo;ll email you within one working day to confirm a time. Nothing is booked until you reply.</DialogDescription>
           </div>
         ) : (
           <>
             <DialogHeader>
-              <DialogTitle className="text-2xl text-navy">Choose a call time</DialogTitle>
+              <DialogTitle className="text-2xl text-navy">Book a free, no-obligation call</DialogTitle>
               <DialogDescription>
-                Pick a preferred time in the UK time zone. We'll email you to confirm availability.
+                A 20-minute call to look at how inquiries reach you today and where they leak. You&rsquo;ll get our honest read either way &mdash; there&rsquo;s nothing to pay and nothing to commit to.
               </DialogDescription>
             </DialogHeader>
             <form onSubmit={submit} className="mt-2 grid gap-4">
@@ -118,21 +127,21 @@ export function BookingDialog({ variant = "primary", className }: { variant?: "p
                 <label className="grid gap-1.5 text-sm font-semibold text-navy">Your email
                   <input name="email" type="email" required autoComplete="email" className="rounded-xl border bg-card px-4 py-3 font-normal" />
                 </label>
-                <label className="grid gap-1.5 text-sm font-semibold text-navy">Preferred date
-                  <input name="date" type="date" min={today} required className="rounded-xl border bg-card px-4 py-3 font-normal" />
+                <label className="grid gap-1.5 text-sm font-semibold text-navy">Preferred date <span className="font-normal text-muted-foreground">(optional)</span>
+                  <input name="date" type="date" min={today} className="rounded-xl border bg-card px-4 py-3 font-normal" />
                 </label>
                 <fieldset className="grid gap-1.5">
-                  <legend className="text-sm font-semibold text-navy">Preferred time (UK)</legend>
+                  <legend className="text-sm font-semibold text-navy">Preferred time <span className="font-normal text-muted-foreground">(optional)</span></legend>
                   <div className="flex gap-2">
-                    <select name="hour" required defaultValue="" aria-label="Hour" className="min-w-0 flex-1 rounded-xl border bg-card px-2 py-3 text-sm">
+                    <select name="hour" defaultValue="" aria-label="Hour" className="min-w-0 flex-1 rounded-xl border bg-card px-2 py-3 text-sm">
                       <option value="" disabled>Hour</option>
                       {HOURS.map((hour) => <option key={hour} value={hour}>{hour}</option>)}
                     </select>
-                    <select name="minute" required defaultValue="" aria-label="Minute" className="min-w-0 flex-1 rounded-xl border bg-card px-2 py-3 text-sm">
+                    <select name="minute" defaultValue="" aria-label="Minute" className="min-w-0 flex-1 rounded-xl border bg-card px-2 py-3 text-sm">
                       <option value="" disabled>Min</option>
                       {MINUTES.map((minute) => <option key={minute} value={minute}>{minute}</option>)}
                     </select>
-                    <select name="period" required defaultValue="" aria-label="AM or PM" className="min-w-0 flex-1 rounded-xl border bg-card px-2 py-3 text-sm">
+                    <select name="period" defaultValue="" aria-label="AM or PM" className="min-w-0 flex-1 rounded-xl border bg-card px-2 py-3 text-sm">
                       <option value="" disabled>AM/PM</option>
                       <option value="AM">AM</option>
                       <option value="PM">PM</option>
@@ -140,14 +149,14 @@ export function BookingDialog({ variant = "primary", className }: { variant?: "p
                   </div>
                 </fieldset>
               </div>
-              <p className="text-xs text-muted-foreground">All times use the UK time zone (GMT or BST, depending on the date). Your time is a request until Leadvela confirms it.</p>
-              <label className="grid gap-1.5 text-sm font-semibold text-navy">What would you like to discuss?
+              <p className="text-xs text-muted-foreground">Skip the date and time if you like &mdash; we&rsquo;ll reply with a few slots that work. All times are UK (GMT or BST).</p>
+              <label className="grid gap-1.5 text-sm font-semibold text-navy">What would you like to discuss? <span className="font-normal text-muted-foreground">(optional)</span>
                 <textarea name="topic" rows={3} className="rounded-xl border bg-card px-4 py-3 font-normal" />
               </label>
               <div className="sr-only" aria-hidden="true"><label>Website<input name="website" tabIndex={-1} autoComplete="off" /></label></div>
               {error && <p role="alert" className="text-sm text-destructive">{error}</p>}
               <button type="submit" disabled={sending} className="btn btn-primary w-full disabled:cursor-wait disabled:opacity-60">
-                {sending ? "Sending…" : "Send Call Request"} <ArrowUpRight className="size-4" />
+                {sending ? "Sending…" : "Request my free call"} <ArrowUpRight className="size-4" />
               </button>
             </form>
           </>
