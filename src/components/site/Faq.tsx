@@ -13,11 +13,11 @@ export const FAQS = [
   },
   {
     q: "Is the GoHighLevel subscription included?",
-    a: "No. GoHighLevel bills you directly for the software, separate from our setup fee. We'll tell you the exact monthly amount before you commit, so there's no surprise on your card.",
+    a: "No. The GoHighLevel subscription is a separate, ongoing software cost on top of our setup fee. We'll confirm the exact monthly amount, and how it's billed, in your quote — so you know the full running cost before you commit.",
   },
   {
     q: "How long does a build take?",
-    a: "A focused CRM and automation setup typically runs two to four weeks. A website alongside it takes longer. You'll get a realistic timeline in your quote rather than an optimistic one we can't hold to.",
+    a: "It depends on how much is being built — a focused CRM and automation setup is quicker than one with a full website alongside it. Rather than quote a headline figure we can't hold to, we give you a dated timeline in your written quote, once we know the scope.",
   },
   {
     q: "What if I already have a website or a CRM?",

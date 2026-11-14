@@ -109,14 +109,14 @@ export function BookingDialog({ variant = "primary", className }: { variant?: "p
           <div role="status" className="py-8 text-center">
             <CheckCircle2 className="mx-auto size-14 text-primary" aria-hidden="true" />
             <DialogTitle className="mt-5 text-2xl font-bold text-navy">Request received</DialogTitle>
-            <DialogDescription className="mt-3">Thanks &mdash; we&rsquo;ve got it. We&rsquo;ll email you within one working day to confirm a time. Nothing is booked until you reply.</DialogDescription>
+            <DialogDescription className="mt-3">Thanks &mdash; we&rsquo;ve got it. We&rsquo;ll email you to confirm a time. Nothing is booked until you reply.</DialogDescription>
           </div>
         ) : (
           <>
             <DialogHeader>
               <DialogTitle className="text-2xl text-navy">Book a free, no-obligation call</DialogTitle>
               <DialogDescription>
-                A 20-minute call to look at how inquiries reach you today and where they leak. You&rsquo;ll get our honest read either way &mdash; there&rsquo;s nothing to pay and nothing to commit to.
+                A short call to look at how inquiries reach you today and where they leak. You&rsquo;ll get our honest read either way &mdash; there&rsquo;s nothing to pay and nothing to commit to.
               </DialogDescription>
             </DialogHeader>
             <form onSubmit={submit} className="mt-2 grid gap-4">
