@@ -194,3 +194,40 @@
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
 }
+
+/* Range slider used by the missed-inquiry calculator. The filled portion of the
+   track is painted with a gradient driven by the --fill custom property, which
+   the component updates as the value changes. */
+@utility range-teal {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 0.5rem;
+  border-radius: 999px;
+  background-image: linear-gradient(to right, var(--primary) 0%, var(--primary) var(--fill, 50%), transparent var(--fill, 50%));
+  background-color: color-mix(in oklab, var(--navy) 10%, transparent);
+  cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 999px;
+    background: var(--card);
+    border: 3px solid var(--navy);
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.15s ease;
+  }
+  &::-webkit-slider-thumb:hover { transform: scale(1.1); }
+
+  &::-moz-range-thumb {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 999px;
+    background: var(--card);
+    border: 3px solid var(--navy);
+    box-shadow: var(--shadow-soft);
+  }
+  &::-moz-range-track { background: transparent; }
+}

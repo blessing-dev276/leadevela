@@ -4,6 +4,7 @@ import { FinalCta, Reveal, ScheduleButton, SectionHeading } from "@/components/s
 import { FlowVisual } from "@/components/site/FlowVisual";
 import { TestimonialVideo } from "@/components/site/TestimonialVideo";
 import { MissedEnquiryCalculator } from "@/components/site/MissedEnquiryCalculator";
+import { DragToCompare } from "@/components/site/DragToCompare";
 import { Faq, FAQS } from "@/components/site/Faq";
 import { services } from "@/data/services";
 import { workCases } from "@/data/work";
@@ -154,12 +155,11 @@ function HomePage() {
         </div>
       </section>
 
+      {/* Before / after */}
+      <DragToCompare />
+
       {/* Cost of missed inquiries */}
-      <section className="container-x py-20 md:py-28">
-        <Reveal>
-          <MissedEnquiryCalculator />
-        </Reveal>
-      </section>
+      <MissedEnquiryCalculator />
 
       {/* Featured portfolio */}
       <section className="container-x py-20 md:py-28">
