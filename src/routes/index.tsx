@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Check, Compass, Hotel, Briefcase, Stethoscope, Home, GraduationCap, Play } from "lucide-react";
+import { ArrowRight, Check, Compass, Hotel, Briefcase, Stethoscope, Home, GraduationCap } from "lucide-react";
 import { FinalCta, Reveal, ScheduleButton, SectionHeading } from "@/components/site/primitives";
 import { FlowVisual } from "@/components/site/FlowVisual";
+import { TestimonialVideo } from "@/components/site/TestimonialVideo";
 import { services } from "@/data/services";
 import { workCases } from "@/data/work";
 import { useHeartbeatSound } from "@/hooks/useHeartbeatSound";
@@ -81,25 +82,20 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Reserved space for a real client video testimonial */}
+      {/* Client video testimonial */}
       <section className="container-x py-16 md:py-24" aria-labelledby="client-stories-title">
         <div className="grid items-center gap-8 rounded-[2rem] border bg-card p-5 shadow-soft sm:p-8 lg:grid-cols-[1fr_0.9fr] lg:gap-12 lg:p-12">
           <Reveal>
             <p className="eyebrow">Client stories</p>
             <h2 id="client-stories-title" className="mt-3 text-3xl font-extrabold text-navy md:text-4xl">The experience, in their own words.</h2>
-            <p className="mt-5 max-w-md leading-relaxed text-muted-foreground">A dedicated space for a client video testimonial. Hear directly from the people behind the businesses we support.</p>
+            <blockquote className="mt-5 max-w-md text-lg leading-relaxed text-muted-foreground">
+              &ldquo;Their team set up GoHighLevel for me, and now I can see who&rsquo;s waiting for a reply as soon as I log in. That&rsquo;s made my mornings a lot easier.&rdquo;
+            </blockquote>
             <div className="mt-8 h-px w-16 bg-primary" aria-hidden="true" />
-            <p className="mt-5 text-sm font-semibold text-primary-deep">Client video coming soon</p>
+            <p className="mt-5 text-sm font-semibold text-primary-deep">Gia &middot; Leadvela client</p>
           </Reveal>
           <Reveal delay={0.08} className="w-full">
-            <div className="relative mx-auto grid aspect-[9/16] w-full max-w-80 place-items-center overflow-hidden rounded-[1.5rem] bg-navy-gradient p-6 text-center text-navy-foreground shadow-lift">
-              <div className="absolute -right-12 -top-12 size-48 rounded-full border border-white/10" aria-hidden="true" />
-              <div className="absolute -bottom-20 -left-12 size-64 rounded-full bg-primary/15 blur-2xl" aria-hidden="true" />
-              <div className="relative">
-                <div className="mx-auto grid size-16 place-items-center rounded-full border border-white/30 bg-white/10 backdrop-blur sm:size-20" aria-hidden="true"><Play className="ml-1 size-6 fill-current sm:size-8" /></div>
-                <p className="mt-5 text-sm font-bold uppercase tracking-[0.16em] text-white/80">Client testimonial video</p>
-              </div>
-            </div>
+            <TestimonialVideo />
           </Reveal>
         </div>
       </section>
